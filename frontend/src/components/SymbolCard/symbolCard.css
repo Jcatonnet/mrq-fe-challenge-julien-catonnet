@@ -12,6 +12,7 @@
   background-color: var(--colorDark);
   border-radius: 4px 4px 0 0;
   color: white;
+  font-weight: 500;
 }
 
 .symbolCard__price {
@@ -30,7 +31,7 @@
 }
 
 .symbolCard__price__value {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
 }
 

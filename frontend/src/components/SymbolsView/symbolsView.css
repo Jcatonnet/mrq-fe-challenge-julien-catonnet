@@ -1,0 +1,26 @@
+.symbolsView__content {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 24px;
+}
+
+.symbolsView__cards {
+    flex-grow: 1;
+    background-color: var(--colorSecondary);
+    padding: 15px;
+}
+
+.symbolsView__chart {
+    padding-left: 12px
+}
+
+@media screen and (max-width: 1024px) {
+    .symbolsView__content {
+        flex-direction: column;
+        margin-top: 4px;
+    }
+
+    .symbolsView__chart {
+        padding: 12px
+    }
+}
