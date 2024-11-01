@@ -3,7 +3,7 @@ import { useAppSelector } from '@/hooks/redux';
 import ListItem from '@/components/ListItem';
 import { TrendCardIcon } from '../TrendCardIcon/TrendCardIcon';
 import { MarketCapIcon, CompanyIcon, IndustryIcon } from '@/assets/icons';
-
+import { formatCompactNumber } from '@/lib/helpers';
 
 type SymbolCardProps = {
   id: string;
@@ -25,11 +25,11 @@ const SymbolCard = ({ id, onClick, price }: SymbolCardProps) => {
       </div>
       <div className="symbolCard__price">
         <div className='symbolCard__price__label'>Price:</div>
-        <div className='symbolCard__price__value'>{price || '--'} </div>
+        <div className='symbolCard__price__value'>{formatCompactNumber(price)} </div>
       </div>
       <ListItem Icon={<CompanyIcon />} label={companyName} spacing="space-between" />
       <ListItem Icon={<IndustryIcon />} label={industry} spacing="space-between" />
-      <ListItem Icon={<MarketCapIcon />} label={marketCap.toString()} spacing="space-between" />
+      <ListItem Icon={<MarketCapIcon />} label={formatCompactNumber(marketCap)} spacing="space-between" />
     </div>
   );
 };
