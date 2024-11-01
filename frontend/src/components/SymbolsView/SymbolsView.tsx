@@ -1,14 +1,11 @@
 import SymbolsGrid from '@/components/SymbolsGrid';
 import PriceChart from '@/components/PriceChart';
 import DesktopInfo from './src/DesktopInfo';
-import { useState } from 'react';
 import './symbolsView.css';
+import useSymbolCardSelection from '@/hooks/useSymbolCardSelection';
 
 const SymbolsView = () => {
-  const [activeSymbol, setActiveSymbol] = useState<null | string>(null);
-  const handleSymbolClick = (symbolId: string) => {
-    setActiveSymbol((s) => (s === symbolId ? null : symbolId));
-  };
+  const { activeSymbol, selectSymbolCard } = useSymbolCardSelection();
 
   return (
     <div className="symbolsView">
@@ -19,7 +16,8 @@ const SymbolsView = () => {
           <PriceChart symbolId={activeSymbol} />
         </div>
         <div className="symbolsView__cards">
-          <SymbolsGrid onSymbolClick={handleSymbolClick} />
+          <SymbolsGrid onSymbolClick={selectSymbolCard} activeSymbol={activeSymbol}
+          />
         </div>
       </div>
     </div>
