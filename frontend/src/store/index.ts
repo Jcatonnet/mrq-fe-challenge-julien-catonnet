@@ -6,6 +6,7 @@ import stocksSlice from '@/store/stocksSlice';
 import priceHistorySlice from '@/store/priceHistorySlice';
 import { dashboardOptionsSlice } from '@/store/dashboardOptionsSlice';
 import symbolCardSelectionSlice from './symbolCardSelectionSlice';
+import symbolsCardPriceAnimationSlice from './symbolsCardPriceAnimationSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,7 +15,8 @@ export const store = configureStore({
     [stocksSlice.name]: stocksSlice.reducer,
     [priceHistorySlice.name]: priceHistorySlice.reducer,
     [dashboardOptionsSlice.name]: dashboardOptionsSlice.reducer,
-    symbolsCardSelection: symbolCardSelectionSlice
+    symbolsCardSelection: symbolCardSelectionSlice,
+    symbolsCardPriceAnimation: symbolsCardPriceAnimationSlice
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.

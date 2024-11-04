@@ -5,6 +5,7 @@ import { TrendCardIcon } from '../TrendCardIcon/TrendCardIcon';
 import { MarketCapIcon, CompanyIcon, IndustryIcon } from '@/assets/icons';
 import { formatCompactNumber } from '@/lib/helpers';
 import useSymbolCardSelection from '@/hooks/useSymbolCardSelection';
+import usePriceChangeAnimation from '@/hooks/usePriceChangeAnimation';
 
 type SymbolCardProps = {
   id: string;
@@ -19,13 +20,14 @@ const SymbolCard = ({ id, price, isSelected }: SymbolCardProps) => {
   );
 
   const { activeSymbol, selectSymbolCard } = useSymbolCardSelection();
+  const animationClass = usePriceChangeAnimation(id, price);
   const hasActiveSelection = !!activeSymbol;
 
-  const cardClass = `symbolCard ${(isSelected ? 'symbolCard--selected' : hasActiveSelection ? 'symbolCard--notSelected' : '')
-    }`;
+  const cardClass = `symbolCard ${isSelected ? 'symbolCard--selected' : hasActiveSelection ? 'symbolCard--notSelected' : ''
+    } ${animationClass}`;
 
   return (
-    <div onClick={() => selectSymbolCard(id)} className={cardClass}>
+    <div onClick={() => selectSymbolCard(id)} className={`symbolCard ${cardClass}`}>
       <div className="symbolCard__header">
         {id} <TrendCardIcon trend={trend} />
       </div>
