@@ -2,6 +2,7 @@
 
 Please find my PR for this frontend challenge. 
 To start it locally please: 
+- navigate to 'fe-improvements-challenge" branch
 - Run `yarn install`
 - Run `yarn start` in the root directory to start all of the services
 
