@@ -1,7 +1,87 @@
 .symbolCard {
-  border: 2px solid black; /* just for visibility, feel free to remove it */
-  margin: 10px; /* just for visibility, feel free to remove it */
-  padding: 10px; /* just for visibility, feel free to remove it */
+  background-color: var(--colorWhite);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  --scale-value: 1;
+  transform: scale(var(--scale-value));
+}
+
+.symbolCard__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 8px;
+  position: relative;
+  background-color: var(--colorDark);
+  border-radius: 4px 4px 0 0;
+  color: white;
+  font-weight: 500;
+}
+
+.symbolCard__price {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow: hidden;
+  justify-content: space-between;
+  padding: 4px;
+}
+
+.symbolCard__price__label {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.symbolCard__price__value {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.symbolCard--selected {
+  --scale-value: 1.04;
+  transform: scale(var(--scale-value));
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.symbolCard--notSelected {
+  --scale-value: 0.94;
+  transform: scale(var(--scale-value));
+}
+
+
+.symbolCard__flashGreen {
+  box-shadow: 0px 0px 15px 5px rgba(0, 255, 0, 0.6);
+  animation: flashGreen 1s ease-in-out;
+}
+
+@keyframes flashGreen {
+
+  0%,
+  100% {
+    box-shadow: 0px 0px 15px 5px rgba(0, 255, 0, 0.6);
+  }
+
+  50% {
+    box-shadow: 0px 0px 25px 10px rgba(144, 238, 144, 0.8);
+  }
+}
+
+.symbolCard__flashRed {
+  box-shadow: 0px 0px 15px 5px rgba(255, 0, 0, 0.6);
+  animation: flashRed 1s ease-in-out;
+}
+
+@keyframes flashRed {
+
+  0%,
+  100% {
+    box-shadow: 0px 0px 15px 5px rgba(255, 0, 0, 0.6);
+  }
+
+  50% {
+    box-shadow: 0px 0px 25px 10px rgba(255, 99, 71, 0.8);
+  }
 }
 
 .symbolCard__shake {
@@ -9,14 +89,20 @@
 }
 
 @keyframes shake {
+
+  0%,
+  100% {
+    transform: scale(var(--scale-value)) translateX(0);
+  }
+
   10%,
   90% {
-    transform: translateX(-2px);
+    transform: scale(var(--scale-value)) translateX(-2px);
   }
 
   20%,
   80% {
-    transform: translateX(4px);
+    transform: scale(var(--scale-value)) translateX(4px);
   }
 
   25%,
@@ -25,7 +111,7 @@
   55%,
   65%,
   75% {
-    transform: translateX(-6px);
+    transform: scale(var(--scale-value)) translateX(-6px);
   }
 
   30%,
@@ -33,6 +119,6 @@
   50%,
   60%,
   70% {
-    transform: translateX(6px);
+    transform: scale(var(--scale-value)) translateX(6px);
   }
 }
