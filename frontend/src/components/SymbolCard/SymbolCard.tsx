@@ -1,13 +1,13 @@
 import './symbolCard.css';
 import { useAppSelector } from '@/hooks/redux';
-import ListItem from '@/components/ListItem';
-import { TrendCardIcon } from '../TrendCardIcon/TrendCardIcon';
-import { MarketCapIcon, CompanyIcon, IndustryIcon } from '@/assets/icons';
 import { formatCompactNumber } from '@/lib/helpers';
 import useSymbolCardSelection from '@/hooks/useSymbolCardSelection';
 import usePriceChangeAnimation from '@/hooks/usePriceChangeAnimation';
 import { selectShowCardInfo } from '@/store/dashboardOptionsSlice';
 import { memo, useCallback, useMemo } from 'react';
+import SymbolCardHeader from './SymbolCardDetail/SymbolCardHeader';
+import SymbolCardInfo from './SymbolCardDetail/SymbolCardInfo';
+import SymbolCardPrice from './SymbolCardDetail/SymbolCardPrice';
 
 type SymbolCardProps = {
   id: string;
@@ -20,7 +20,6 @@ const SymbolCard = memo(({ id, isSelected }: SymbolCardProps) => {
     (state) => state.stocks.entities[id]
   );
   const price = useAppSelector((state) => state.prices[id]);
-
 
   const { activeSymbol, selectSymbolCard } = useSymbolCardSelection();
   const animationClass = usePriceChangeAnimation(id, price);
@@ -35,27 +34,20 @@ const SymbolCard = memo(({ id, isSelected }: SymbolCardProps) => {
   const handleClick = useCallback(() => selectSymbolCard(id), [selectSymbolCard, id]);
 
   const formattedPrice = useMemo(() => formatCompactNumber(price), [price]);
-
-  const cardInfo = useMemo(() => showCardInfo && (
-    <>
-      <ListItem Icon={<CompanyIcon />} label={companyName} spacing="space-between" />
-      <ListItem Icon={<IndustryIcon />} label={industry} spacing="space-between" />
-      <ListItem Icon={<MarketCapIcon />} label={formatCompactNumber(marketCap)} spacing="space-between" />
-    </>
-  ), [showCardInfo, companyName, industry, marketCap]);
+  const formattedMarketCap = useMemo(() => formatCompactNumber(marketCap), [marketCap]);
 
   return (
     <div onClick={handleClick} className={cardClass}>
-      <div className="symbolCard__header">
-        {id} <TrendCardIcon trend={trend} />
-      </div>
-      <div className="symbolCard__price">
-        <div className='symbolCard__price__label'>Price:</div>
-        <div className='symbolCard__price__value'>{formattedPrice}</div>
-      </div>
+      <SymbolCardHeader id={id} trend={trend} />
+      <SymbolCardPrice price={formattedPrice} />
 
-      {cardInfo}
-
+      {showCardInfo && (
+        <SymbolCardInfo
+          companyName={companyName}
+          industry={industry}
+          marketCap={formattedMarketCap}
+        />
+      )}
     </div>
   );
 });
