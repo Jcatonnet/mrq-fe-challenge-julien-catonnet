@@ -1,7 +1,7 @@
 .symbolsView__content {
     display: flex;
     flex-direction: row-reverse;
-    margin-top: 24px;
+    margin: 24px 8px 0px 0px
 }
 
 .symbolsView__cards {
