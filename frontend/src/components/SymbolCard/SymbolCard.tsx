@@ -6,6 +6,7 @@ import { MarketCapIcon, CompanyIcon, IndustryIcon } from '@/assets/icons';
 import { formatCompactNumber } from '@/lib/helpers';
 import useSymbolCardSelection from '@/hooks/useSymbolCardSelection';
 import usePriceChangeAnimation from '@/hooks/usePriceChangeAnimation';
+import { selectShowCardInfo } from '@/store/dashboardOptionsSlice';
 
 type SymbolCardProps = {
   id: string;
@@ -22,6 +23,7 @@ const SymbolCard = ({ id, price, isSelected }: SymbolCardProps) => {
   const { activeSymbol, selectSymbolCard } = useSymbolCardSelection();
   const animationClass = usePriceChangeAnimation(id, price);
   const hasActiveSelection = !!activeSymbol;
+  const showCardInfo = useAppSelector(selectShowCardInfo);
 
   const cardClass = `symbolCard ${isSelected ? 'symbolCard--selected' : hasActiveSelection ? 'symbolCard--notSelected' : ''
     } ${animationClass}`;
@@ -35,9 +37,15 @@ const SymbolCard = ({ id, price, isSelected }: SymbolCardProps) => {
         <div className='symbolCard__price__label'>Price:</div>
         <div className='symbolCard__price__value'>{formatCompactNumber(price)} </div>
       </div>
-      <ListItem Icon={<CompanyIcon />} label={companyName} spacing="space-between" />
-      <ListItem Icon={<IndustryIcon />} label={industry} spacing="space-between" />
-      <ListItem Icon={<MarketCapIcon />} label={formatCompactNumber(marketCap)} spacing="space-between" />
+
+      {showCardInfo && (
+        <>
+          <ListItem Icon={<CompanyIcon />} label={companyName} spacing="space-between" />
+          <ListItem Icon={<IndustryIcon />} label={industry} spacing="space-between" />
+          <ListItem Icon={<MarketCapIcon />} label={formatCompactNumber(marketCap)} spacing="space-between" />
+        </>
+      )}
+
     </div>
   );
 };
