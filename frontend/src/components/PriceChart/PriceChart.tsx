@@ -10,10 +10,24 @@ type PriceChartProps = {
 
 const PriceChart = ({ symbolId }: PriceChartProps) => {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    if (symbolId) {
-      dispatch(fetchPriceHistory(symbolId));
-    }
+
+    if (!symbolId) return;
+
+    const fetchData = async () => {
+      try {
+        await dispatch(fetchPriceHistory(symbolId));
+      } catch (error) {
+        console.error("Failed to fetch price history:", error);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      dispatch({ type: 'priceHistory/clearHistory' });
+    };
   }, [dispatch, symbolId]);
 
   const apiState = useAppSelector(selectors.apiState);
