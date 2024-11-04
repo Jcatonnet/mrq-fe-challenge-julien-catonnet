@@ -9,7 +9,7 @@ type SymbolsGridProps = {
   activeSymbol: string | null;
 };
 
-const SymbolsGrid = memo(({ onSymbolClick, activeSymbol }: SymbolsGridProps) => {
+const SymbolsGrid = ({ onSymbolClick, activeSymbol }: SymbolsGridProps) => {
   const stockSymbols = useAppSelector(selectors.selectStockIds);
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -34,6 +34,6 @@ const SymbolsGrid = memo(({ onSymbolClick, activeSymbol }: SymbolsGridProps) => 
       {symbolCards}
     </div>
   );
-});
+};
 
-export default SymbolsGrid;
+export default memo(SymbolsGrid);

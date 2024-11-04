@@ -6,10 +6,10 @@ type SymbolCardHeaderProps = {
     trend: string | null;
 };
 
-const SymbolCardHeader = memo(({ id, trend }: SymbolCardHeaderProps) => (
+const SymbolCardHeader = ({ id, trend }: SymbolCardHeaderProps) => (
     <div className="symbolCard__header">
         {id} <TrendCardIcon trend={trend} />
     </div>
-));
+);
 
-export default SymbolCardHeader;
+export default memo(SymbolCardHeader);

@@ -14,13 +14,13 @@ type ListItemProps = {
   | 'baseline'
   | undefined;
 };
-const ListItem = memo(({ Icon, label, spacing }: ListItemProps) => {
+const ListItem = ({ Icon, label, spacing }: ListItemProps) => {
   return (
     <div style={{ justifyContent: spacing }} className={`listItem`}>
       <div className="listItem__icon">{Icon}</div>
       <div className="listItem__value">{label}</div>
     </div>
   );
-});
+};
 
-export default ListItem;
+export default memo(ListItem);

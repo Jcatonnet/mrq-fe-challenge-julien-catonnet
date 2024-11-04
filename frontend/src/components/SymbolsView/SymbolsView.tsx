@@ -5,7 +5,7 @@ import './symbolsView.css';
 import useSymbolCardSelection from '@/hooks/useSymbolCardSelection';
 import { memo } from 'react';
 
-const SymbolsView = memo(() => {
+const SymbolsView = () => {
   const { activeSymbol, selectSymbolCard } = useSymbolCardSelection();
 
   return (
@@ -23,6 +23,6 @@ const SymbolsView = memo(() => {
       </div>
     </div>
   );
-});
+};
 
-export default SymbolsView;
+export default memo(SymbolsView);

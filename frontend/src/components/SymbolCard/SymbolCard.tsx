@@ -15,7 +15,7 @@ type SymbolCardProps = {
   isSelected: boolean;
 };
 
-const SymbolCard = memo(({ id, isSelected }: SymbolCardProps) => {
+const SymbolCard = ({ id, isSelected }: SymbolCardProps) => {
   const { trend, companyName, industry, marketCap } = useAppSelector(
     (state) => state.stocks.entities[id]
   );
@@ -50,5 +50,5 @@ const SymbolCard = memo(({ id, isSelected }: SymbolCardProps) => {
       )}
     </div>
   );
-});
-export default SymbolCard;
+};
+export default memo(SymbolCard);

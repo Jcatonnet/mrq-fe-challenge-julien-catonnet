@@ -8,12 +8,12 @@ type SymbolCardInfoProps = {
     marketCap: string;
 };
 
-const SymbolCardInfo = memo(({ companyName, industry, marketCap }: SymbolCardInfoProps) => (
+const SymbolCardInfo = ({ companyName, industry, marketCap }: SymbolCardInfoProps) => (
     <>
         <ListItem Icon={<CompanyIcon />} label={companyName} spacing="space-between" />
         <ListItem Icon={<IndustryIcon />} label={industry} spacing="space-between" />
         <ListItem Icon={<MarketCapIcon />} label={marketCap} spacing="space-between" />
     </>
-));
+);
 
-export default SymbolCardInfo;
+export default memo(SymbolCardInfo);
