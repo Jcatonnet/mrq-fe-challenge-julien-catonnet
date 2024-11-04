@@ -1,5 +1,16 @@
 # Julien Catonnet challenge solution
 
+Please find my PR for this frontend challenge. 
+To start it locally please: 
+- Run `yarn install`
+- Run `yarn start` in the root directory to start all of the services
+
+For this task, we did not add unit testing and e2e testing on purpose to make this project submission lighter.
+In a real world scenario, we would add:
+- unit test using React testing library to utility functions, critical reducers and slices, key components rendering/ behaviour/ props
+- integration tests to test critical flow and interactions (card selection and price chart display, info toogle etc)
+
+
 # Welcome to the MrQ take home assignment.
 
 ## Please read the instructions and the requirements carefully before you start working on the assignment.
