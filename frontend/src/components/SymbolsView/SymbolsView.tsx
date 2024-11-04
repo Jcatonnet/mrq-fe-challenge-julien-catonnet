@@ -3,8 +3,9 @@ import PriceChart from '@/components/PriceChart';
 import DesktopInfo from './src/DesktopInfo';
 import './symbolsView.css';
 import useSymbolCardSelection from '@/hooks/useSymbolCardSelection';
+import { memo } from 'react';
 
-const SymbolsView = () => {
+const SymbolsView = memo(() => {
   const { activeSymbol, selectSymbolCard } = useSymbolCardSelection();
 
   return (
@@ -22,6 +23,6 @@ const SymbolsView = () => {
       </div>
     </div>
   );
-};
+});
 
 export default SymbolsView;

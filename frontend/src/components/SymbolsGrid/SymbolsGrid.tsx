@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { memo, useCallback, useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import SymbolCard from '../SymbolCard';
 import { fetchAllStocks, selectors } from '@/store/stocksSlice';
@@ -9,21 +9,31 @@ type SymbolsGridProps = {
   activeSymbol: string | null;
 };
 
-const SymbolsGrid = ({ onSymbolClick, activeSymbol }: SymbolsGridProps) => {
+const SymbolsGrid = memo(({ onSymbolClick, activeSymbol }: SymbolsGridProps) => {
   const stockSymbols = useAppSelector(selectors.selectStockIds);
-  const prices = useAppSelector((state) => state.prices);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchAllStocks());
   }, [dispatch]);
 
+  const handleSymbolClick = useCallback((symbolId: string) => onSymbolClick(symbolId), [onSymbolClick]);
+
+  const symbolCards = useMemo(() => stockSymbols.map((id) => (
+    <SymbolCard
+      onClick={handleSymbolClick}
+      key={id}
+      id={id}
+      isSelected={id === activeSymbol}
+    />
+  )), [stockSymbols, handleSymbolClick, activeSymbol]);
+
+
+
   return (
     <div className='symbolsGrid__grid'>
-      {stockSymbols.map((id, i) => (
-        <SymbolCard price={prices[id]} onClick={onSymbolClick} key={i} id={id} isSelected={id === activeSymbol} />
-      ))}
+      {symbolCards}
     </div>
   );
-};
+});
 
 export default SymbolsGrid;
